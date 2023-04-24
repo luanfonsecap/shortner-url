@@ -1,10 +1,19 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { MongooseModule } from '@nestjs/mongoose';
+
+import { ConfigModule } from '@nestjs/config';
+import { HashModule } from './modules/hash/hash.module';
+import { ShortenModule } from './modules/shorten/shorten.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigModule.forRoot(),
+    MongooseModule.forRoot(process.env.DATABASE_URL, {
+      useNewUrlParser: true,
+      dbName: 'shorten-server',
+    }),
+    HashModule,
+    ShortenModule,
+  ],
 })
 export class AppModule {}
