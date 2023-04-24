@@ -8,10 +8,10 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { differenceInMilliseconds } from 'date-fns';
 
-import { HashService } from 'src/modules/hash/services';
+import { HashService } from '../../hash/services/hash.service';
 import { Shorten } from '../schemas/shorten.schema';
-import { AliasExistsException } from 'src/common/exceptions/aliasExists.exception';
-import { AliasNotFoundException } from 'src/common/exceptions/aliasNotFound.exception';
+import { AliasExistsException } from '../../../common/exceptions/aliasExists.exception';
+import { AliasNotFoundException } from '../../../common/exceptions/aliasNotFound.exception';
 
 @Injectable()
 export class ShortenService {
@@ -28,7 +28,7 @@ export class ShortenService {
     try {
       const alias = await this.createUniqueHashAlias(url);
 
-      const shortenedURL = new this.shortenModel({
+      const shortenedURL = await this.shortenModel.create({
         url,
         alias,
       });
@@ -48,7 +48,6 @@ export class ShortenService {
       };
     } catch (error) {
       this.logger.error('Error creating shortened URL: ', error);
-
       throw new InternalServerErrorException();
     }
   }
@@ -65,7 +64,7 @@ export class ShortenService {
         throw new AliasExistsException();
       }
 
-      const shortenedURL = new this.shortenModel({
+      const shortenedURL = await this.shortenModel.create({
         url,
         alias: customAlias,
       });
@@ -107,7 +106,7 @@ export class ShortenService {
     return record.url;
   }
 
-  private async createUniqueHashAlias(url: string, attempts = 2) {
+  async createUniqueHashAlias(url: string, attempts = 2) {
     if (attempts === 0) {
       throw new ConflictException();
     }
@@ -119,7 +118,7 @@ export class ShortenService {
     });
 
     if (shortenedAliasAlreadyExists) {
-      return this.createUniqueHashAlias(url);
+      return this.createUniqueHashAlias(url, attempts - 1);
     }
 
     return alias;
