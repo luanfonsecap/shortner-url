@@ -11,6 +11,7 @@ import { differenceInMilliseconds } from 'date-fns';
 import { HashService } from 'src/modules/hash/services';
 import { Shorten } from '../schemas/shorten.schema';
 import { AliasExistsException } from 'src/common/exceptions/aliasExists.exception';
+import { AliasNotFoundException } from 'src/common/exceptions/aliasNotFound.exception';
 
 @Injectable()
 export class ShortenService {
@@ -94,6 +95,16 @@ export class ShortenService {
 
       throw new InternalServerErrorException();
     }
+  }
+
+  async retrieveOriginalURL(alias: string) {
+    const record = await this.shortenModel.findOne({ alias });
+
+    if (!record) {
+      throw new AliasNotFoundException();
+    }
+
+    return record.url;
   }
 
   private async createUniqueHashAlias(url: string, attempts = 2) {
