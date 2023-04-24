@@ -1,5 +1,5 @@
 {
-  "name": "shortner-url",
+  "name": "shortener-url",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -21,9 +21,11 @@
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.0.0",
     "@nestjs/mongoose": "^9.2.2",
     "@nestjs/platform-express": "^9.0.0",
+    "date-fns": "^2.29.3",
     "mongoose": "^7.0.4",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
