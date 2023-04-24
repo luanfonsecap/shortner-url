@@ -18,6 +18,17 @@ export class Shorten {
     required: true,
   })
   url: string;
+
+  @Prop({
+    default: 0,
+  })
+  hints: number;
 }
 
 export const ShortenSchema = SchemaFactory.createForClass(Shorten);
+
+ShortenSchema.post('findOne', function (doc) {
+  if (doc && doc?.updateOne) {
+    doc.updateOne({ $inc: { hints: 1 } }).exec();
+  }
+});
