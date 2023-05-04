@@ -15,7 +15,7 @@ export class ShortenController {
 
   constructor(private readonly shortenService: ShortenService) {}
 
-  @Get('/r/:alias')
+  @Get('/:alias')
   async redirectToOriginalURL(@Response() res, @Param('alias') alias: string) {
     this.logger.log(`Redirecting to original URL for alias: ${alias}`);
 
