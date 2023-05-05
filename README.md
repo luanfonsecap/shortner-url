@@ -1,94 +1,112 @@
-# Hire.me
+<h1 align="center">
+  <img alt="Logo" height="200" src="./docs/assets/logo.png" />
+  <br>
+  Shortener URL
+</h1>
 
-Um pequeno projeto para testar suas habilidades como programador.
+<p align="center">
 
-## Instruções Gerais
+   <img alt="License MIT" src="https://img.shields.io/badge/license-MIT-blue">
 
-1. _Clone_ este repositório
-2. Em seu _fork_, atenda os casos de usos especificados e se desejar também os bonus points
-3. Envio um e-mail para rh@bemobi.com.br com a seu Nome e endereço do repositorio.
+  <img alt="TypeScript Language" src="https://img.shields.io/badge/typescript-94%25-blue">
 
-## Projeto
+  <img alt="Languages" src="https://img.shields.io/badge/languages-2-blue">
 
-O projeto consiste em reproduzir um encurtador de URL's (apenas sua API), simples e com poucas funções, porém com espaço suficiente para mostrar toda a gama de desenho de soluções, escolha de componentes, mapeamento ORM, uso de bibliotecas de terceiros, uso de GIT e criatividade.
+  <a href="https://www.codacy.com/manual/luanfonsecap/jokes-norris?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=luanfonsecap/jokes-norris&amp;utm_campaign=Badge_Grade">
+    <img alt="Code Quality" src="https://api.codacy.com/project/badge/Grade/da538d9c65c7489cb78390a0159c3a2a">
+  </a>
+  
+  <br>
 
-O projeto consiste de dois casos de uso:
+  <p align="center">
+    :sparkles: Desafio backend proposto pela <a href="https://github.com/bemobi/hire.me">Bemobi</a>
+  </p>
+  <br>
+</p>
 
-1. Shorten URL
-2. Retrieve URL
+# :muscle: O Projeto
 
-### 1 - Shorten URL
+**Shortener URL** é uma aplicação que encurta url's fornecidas por qualquer client através de requisições http, criando um `alias` gerado aleatoriamente ou fornecido pelo mesmo, e também recupera e redireciona um client para uma URL original quando requisitado uma short url válida.
 
-![Short URL](http://i.imgur.com/MFB7VP4.jpg)
+<br>
 
-1. Usuario chama a API passando a URL que deseja encurtar e um parametro opcional **CUSTOM_ALIAS**
-   1. Caso o **CUSTOM_ALIAS** já exista, um erro especifico `{ERR_CODE: 001, Description:CUSTOM ALIAS ALREADY EXISTS}` deve ser retornado.
-   2. Toda URL criada sem um **CUSTOM_ALIAS** deve ser reduzida a um novo alias, **você deve sugerir um algoritmo para isto e o porquê.**
-2. O Registro é colocado em um repositório (_Data Store_)
-3. É retornado para o cliente um resultado que contenha a URL encurtada e outros detalhes como
-   1. Quanto tempo a operação levou
-   2. URL Original
+## :fire: Funcionalidades
 
-Exemplos (Você não precisa seguir este formato):
+- Encurtar uma url com `alias` aleatório
+- Encurtar uma url com `alias` customizado
+- Recuperar e redirecionar client para url completa
+- Recuperar lista de links mais acessados
 
-- Chamada sem CUSTOM_ALIAS
+<br>
 
-```
-PUT http://shortener/create?url=http://www.bemobi.com.br
+## ⚗️ Tecnologias
 
-{
-   "alias": "XYhakR",
-   "url": "http://shortener/u/XYhakR",
-   "statistics": {
-       "time_taken": "10ms",
-   }
-}
-```
+- NestJs
+- MongoDB
+- Mongoose
+- Date-fns
+- Jest
+- Docker
 
-- Chamada com CUSTOM_ALIAS
+<br>
 
-```
-PUT http://shortener/create?url=http://www.bemobi.com.br&CUSTOM_ALIAS=bemobi
+## :rocket: Rodando o Projeto
 
-{
-   "alias": "bemobi",
-   "url": "http://shortener/u/bemobi",
-   "statistics": {
-       "time_taken": "12ms",
-   }
-}
-```
-
-- Chamada com CUSTOM_ALIAS que já existe
+É necessário ter o ambiente para docker configurado e o [Yarn](https://yarnpkg.com/) instalado.
+<br>
+Para iniciar a aplicação clone este repositório e execute os comandos abaixo:
 
 ```
-PUT http://shortener/create?url=http://www.github.com&CUSTOM_ALIAS=bemobi
-
-{
-   "alias": "bemobi",
-   "err_code": "001",
-   "description": "CUSTOM ALIAS ALREADY EXISTS"
-}
+cd shortener-url
+docker-compose up -d --build
 ```
 
-### 2 - Retrieve URL
+Dentro do diretório `docs/api` você irá encontrar um arquivo JSON para ser importado no [Insomnia](https://insomnia.rest/download) para realizar as requisições.
 
-![Retrieve URL](http://i.imgur.com/f9HESb7.jpg)
+Ou, pode executar os seguintes comandos no terminal:
+<br>
 
-1. Usuario chama a API passando a URL que deseja acessar
-   1. Caso a **URL** não exista, um erro especifico `{ERR_CODE: 002, Description:SHORTENED URL NOT FOUND}` deve ser retornado.
-2. O Registro é lido de um repositório (_Data Store_)
-3. Esta tupla ou registro é mapeado para uma entidade de seu projeto
-4. É retornado para o cliente um resultado que contenha a URL final, a qual ele deve ser redirecionado automaticamente
+1. Encurtar uma url com `alias` aleatório
 
-## Stack Tecnológico
+```shell
+curl --request POST \
+  --url 'http://localhost:3000/shorten/create?url=https%3A%2F%2Fwww.bing.com'
+```
 
-Não há requerimentos específicos para linguagens, somos poliglotas. Utilize a linguagem que você se sente mais confortável.
+2. Encurtar uma url com `alias` customizado
 
-## Bonus Points
+```shell
+curl --request POST \
+  --url 'http://localhost:3000/shorten/create?url=https%3A%2F%2Fwww.bing.com&alias=my_custom_alias'
+```
 
-1. Crie _testcases_ para todas as funcionalidades criadas
-2. Crie um _endpoint_ que mostre as dez _URL's_ mais acessadas
-3. Crie um _client_ para chamar sua API
-4. Faça um diagrama de sequencia da implementação feita nos casos de uso (Dica, use o https://www.websequencediagrams.com/)
-5. Monte um deploy da sua solução utilizando containers
+3. Recuperar e redirecionar client para url completa
+
+```shell
+curl --request GET \
+  --url http://localhost:3000/shorten/#alias aqui
+```
+
+4. Recuperar lista de links mais acessados
+
+```shell
+curl --request GET \
+  --url http://localhost:3000/favorites
+```
+
+<br>
+
+## :bicyclist: RoadMap
+
+- [x] Docker
+- [ ] Integration tests
+- [ ] Swagger
+- [ ] Cache strategy
+
+<br>
+
+---
+
+<h6 align="center">
+	Feito com :purple_heart: por Luan Fonseca
+</h6>
