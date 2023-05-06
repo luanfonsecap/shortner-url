@@ -101,7 +101,7 @@ curl --request GET \
 - [x] Docker
 - [ ] Integration tests
 - [ ] Swagger
-- [ ] Cache strategy
+- [x] Cache strategy
 - [ ] Microservices branch version
 
 <br>
