@@ -39,7 +39,6 @@ export class ShortenService {
       return {
         alias: result.alias,
         url: result.url,
-        shortened: result.alias,
         statistics: {
           timeTaken: `${Math.abs(
             differenceInMilliseconds(startTime, endTime),
@@ -75,7 +74,6 @@ export class ShortenService {
       return {
         alias: result.alias,
         url: result.url,
-        shortened: result.alias,
         statistics: {
           timeTaken: `${Math.abs(
             differenceInMilliseconds(startTime, endTime),

@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 
 import { HashService } from '../hash.service';
 
-describe('Hash Service Unit Tests', async () => {
+describe('Hash Service Unit Tests', () => {
   let hashService: HashService;
 
   beforeEach(async () => {

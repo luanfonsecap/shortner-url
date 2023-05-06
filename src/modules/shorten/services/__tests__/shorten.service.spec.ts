@@ -39,7 +39,6 @@ describe('Shorten Service Unit Tests', () => {
 
     expect(shortenedURL).toHaveProperty('alias');
     expect(shortenedURL).toHaveProperty('url');
-    expect(shortenedURL).toHaveProperty('shortened');
     expect(shortenedURL).toHaveProperty('statistics');
   });
 
@@ -53,7 +52,6 @@ describe('Shorten Service Unit Tests', () => {
     expect(shortenedURL).toMatchObject({
       alias: 'test',
       url: 'test',
-      shortened: 'http://localhost:3000/r/test',
       statistics: expect.any(Object),
     });
   });
