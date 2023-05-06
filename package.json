@@ -1,6 +1,6 @@
 {
   "name": "shortener-url",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Bemobi's technical challenge api to shortener url",
   "author": "luanfonsecap@icloud.com",
   "private": true,
