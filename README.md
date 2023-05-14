@@ -103,6 +103,7 @@ curl --request GET \
 - [ ] Swagger
 - [x] Cache strategy
 - [ ] Microservices branch version
+- [ ] CI/CD Workflow
 
 <br>
 
