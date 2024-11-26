@@ -19,27 +19,27 @@
   <br>
 
   <p align="center">
-    :sparkles: Desafio backend proposto pela <a href="https://github.com/bemobi/hire.me">Bemobi</a>
+    :sparkles: Backend challenge proposed by <a href="https://github.com/bemobi/hire.me">Bemobi</a>
   </p>
   <br>
 </p>
 
-# :muscle: O Projeto
+# :muscle: The Project
 
-**Shortener URL** é uma aplicação que encurta url's fornecidas por qualquer client através de requisições http, criando um `alias` gerado aleatoriamente ou fornecido pelo mesmo, e também recupera e redireciona um client para uma URL original quando requisitado uma short url válida.
-
-<br>
-
-## :fire: Funcionalidades
-
-- Encurtar uma url com `alias` aleatório
-- Encurtar uma url com `alias` customizado
-- Recuperar e redirecionar client para url completa
-- Recuperar lista de links mais acessados
+**Shortener URL** is an application that shortens URLs provided by any client through http requests, creating a randomly generated or provided alias, and also retrieves and redirects a client to an original URL when a valid short URL is requested.
 
 <br>
 
-## ⚗️ Tecnologias
+## :fire: Features
+
+- Shorten a url with a random `alias`
+- Shorten a url with a custom `alias`
+- Retrieve and redirect client to full url
+- Retrieve list of most accessed links
+
+<br>
+
+## ⚗️ Tech Stack
 
 - NestJs
 - MongoDB
@@ -50,44 +50,44 @@
 
 <br>
 
-## :rocket: Rodando o Projeto
+## :rocket: Run the project
 
-É necessário ter o ambiente para docker configurado e o [Yarn](https://yarnpkg.com/) instalado.
+You need to have the docker environment configured and [Yarn](https://yarnpkg.com/) installed.
 <br>
-Para iniciar a aplicação clone este repositório e execute os comandos abaixo:
+To start the application, clone this repository and run the commands below:
 
 ```
 cd shortener-url
 docker-compose up -d --build
 ```
 
-Dentro do diretório `docs/api` você irá encontrar um arquivo JSON para ser importado no [Insomnia](https://insomnia.rest/download) para realizar as requisições.
+Inside the `docs/api` directory you will find a JSON file to import into [Insomnia](https://insomnia.rest/download) to make the requests.
 
-Ou, pode executar os seguintes comandos no terminal:
+Or, you can run the following commands in the terminal:
 <br>
 
-1. Encurtar uma url com `alias` aleatório
+1. Shorten a url with random `alias`
 
 ```shell
 curl --request POST \
   --url 'http://localhost:3000/shorten/create?url=https%3A%2F%2Fwww.bing.com'
 ```
 
-2. Encurtar uma url com `alias` customizado
+2. Shorten a url with custom `alias`
 
 ```shell
 curl --request POST \
   --url 'http://localhost:3000/shorten/create?url=https%3A%2F%2Fwww.bing.com&alias=my_custom_alias'
 ```
 
-3. Recuperar e redirecionar client para url completa
+3. Retrieve and redirect client to full url
 
 ```shell
 curl --request GET \
   --url http://localhost:3000/shorten/#alias aqui
 ```
 
-4. Recuperar lista de links mais acessados
+4. Retrieve list of most visited links
 
 ```shell
 curl --request GET \
@@ -96,7 +96,7 @@ curl --request GET \
 
 <br>
 
-## :bicyclist: RoadMap
+## :bicyclist: Roadmap
 
 - [x] Docker
 - [ ] Integration tests
@@ -110,5 +110,5 @@ curl --request GET \
 ---
 
 <h6 align="center">
-	Feito com :purple_heart: por Luan Fonseca
+	Made with :purple_heart: by Luan Fonseca
 </h6>
